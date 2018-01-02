@@ -15,9 +15,9 @@ public class Crypto_attack {
       int[] message2 = { 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
 		    0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1 };
       int[] chitext;
-      Encrypt.setKey("kryptochallengegruppe10.txt");
-      Encrypt.setMessage(message);
-
+      //Encrypt.setKey("kryptochallengegruppe10.txt");
+      //Encrypt.setMessage(message);
+/*
        chitext= Encrypt.runEncryption();
        System.out.println("Klar1" +Arrays.toString(message));
        System.out.println("Chi1" +Arrays.toString(chitext));
@@ -34,9 +34,35 @@ public class Crypto_attack {
        System.out.println("Klar3" +Arrays.toString(message2));
        System.out.println("Chi3" +Arrays.toString(chitext));
        
+       */
+       
+       //Encrypt.create(43);
        
        
-       Encrypt.create(43);
+       int[][] test = {
+    		   {0,0,0,0,1},
+    		   {0,1,0,1,1},
+    		   {1,0,0,1,0},
+    		   {0,0,1,0,1},
+    		   {0,1,0,1,1},
+       };
+       
+       
+       
+       
+       
+       int[] test1 = {1,1,0,1,0};
+       
+       int[] test2 = {1,0,1,1,0};
+       
+       //test1 = Encrypt.eliminate(test1, test2);
+       
+       //System.out.println(Arrays.toString(test1));
+       
+       Encrypt.gaussianElimination(test);
+       
+       
+       
        
        
        
