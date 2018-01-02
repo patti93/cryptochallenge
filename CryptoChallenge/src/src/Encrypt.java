@@ -192,7 +192,7 @@ public class Encrypt {
 	int[][] plains = new int[lines][lengthplain];
 	int[][] ciphers = new int[lines][lengthplain];
 
-	// Erstellen der Klartexte
+	// Erstellen der Klartexteee
 	for (int i = 0; i < lines; i++) {
 
 	    for (int j = 0; j < plain.length; j++) {
