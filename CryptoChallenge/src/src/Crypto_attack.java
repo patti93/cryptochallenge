@@ -15,8 +15,18 @@ public class Crypto_attack {
       int[] message2 = { 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
 		    0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1 };
       int[] chitext;
-      Encrypt.setKey("kryptochallengegruppe10.txt");
-      Encrypt.setMessage(message);
+      
+      int[] array = {1,1,1,0,0};
+      Encrypt.setKey("Beispielangriff.txt");
+      Encrypt.setMessage(array);
+      chitext = Encrypt.runEncryption();
+      
+      //Encrypt.printPk();
+      //System.out.println("Klar1" +Arrays.toString(array));
+      //System.out.println("Chi1" +Arrays.toString(chitext));
+      
+      //Encrypt.createMatrixLine(array, chitext);
+      
 /*
        chitext= Encrypt.runEncryption();
        System.out.println("Klar1" +Arrays.toString(message));
@@ -116,19 +126,20 @@ public class Crypto_attack {
        String test3 = "x_7*x_8";
        String test4 = "x_43*x_42";
        
+       //Encrypt.getValueFromArray("x_1");
        
-       System.out.println(Encrypt.doShit(test1));
-       System.out.println(Encrypt.doShit(test4));
-       System.out.println(Encrypt.doShit(test3));
+      // System.out.println(Encrypt.doShit(test1));
+       //System.out.println(Encrypt.doShit(test4));
+     //  System.out.println(Encrypt.doShit(test3));
        
       // Encrypt.gaussianElimination(test2);
        
        
        
- 
+       //Encrypt.printPk();
        
      
-       //Encrypt.gaussianElimination(Encrypt.create(43));
+       Encrypt.gaussianElimination(Encrypt.create(5));
        
        
        

@@ -24,6 +24,12 @@ public class Encrypt {
 		pKey = getKeyString(buffer);
 	}
 
+	public static void printPk() {
+
+		System.out.println(pKey);
+
+	}
+
 	public static void setMessage(int[] message) {
 		Encrypt.message = message;
 	}
@@ -36,7 +42,7 @@ public class Encrypt {
 			result = 0;
 		else if (a == 1 && b == 1)
 			result = 0;
-		else if( a!=b)
+		else if (a != b)
 			result = 1;
 
 		return result;
@@ -56,6 +62,7 @@ public class Encrypt {
 
 		int value = 0, index = 0;
 
+		//System.out.println(shit);
 		if (shit.length() == 4) {
 
 			index = Integer.parseInt(shit.substring(2, 4));
@@ -64,8 +71,8 @@ public class Encrypt {
 
 			index = Integer.parseInt(shit.substring(2, 3));
 		}
-		 System.out.println(shit);
-		 System.out.println(index);
+		// System.out.println(shit);
+		// System.out.println(index);
 		value = message[index - 1];
 
 		return value;
@@ -88,7 +95,7 @@ public class Encrypt {
 	public static int doCalcLine(char[] c) {
 
 		String summand = "";
-		int value = 0, count = 0;
+		int value = 0, count = 0, check = 0;
 		int result = 0;
 		List<Integer> temp = new ArrayList<Integer>();
 
@@ -98,15 +105,18 @@ public class Encrypt {
 			// summand ende!
 			if (c[i] == '+') {
 
-				value = doShit(summand);
-				temp.add(value);
+				temp.add(doShit(summand));
 				summand = "";
 
 			}
 
-			else if (c[i] != 32 && c[i] != 10 && c[i] != 9) {
+			else if (c[i] != 32 && c[i] != 10 && c[i] != 9 && c[i] != 13) {
+				
 				summand = summand + c[i];
 			}
+		
+			//in the end do shit anyway
+			if(i == c.length -1)temp.add(doShit(summand));
 
 		}
 		// 1en Zählen für addition in der Zeile -> gerade Endergebnis 0 ungerade
@@ -116,6 +126,7 @@ public class Encrypt {
 			if (temp.get(j) == 1)
 				count++;
 		}
+		//System.out.println(temp.toString());
 
 		if (count % 2 == 0)
 			result = 0;
@@ -151,6 +162,7 @@ public class Encrypt {
 		List<String> expressions = new ArrayList<String>(Arrays.asList(pKey.split(",")));
 
 		for (int i = 0; i < output.length; i++) {
+			//System.out.println(expressions.get(i));
 			output[i] = doCalcLine(expressions.get(i).toCharArray());
 		}
 		return output;
@@ -171,12 +183,12 @@ public class Encrypt {
 					result[j + (plain.length * i)] = 0;
 				}
 			}
-			// System.out.println("Cipher:" + Arrays.toString(cipher));
-			// System.out.println("Plain:" + Arrays.toString(plain));
-			// System.out.println("Ergebnis MatrixZeile" +
-			// Arrays.toString(result));
+			
 		}
-
+		 //System.out.println("Cipher:" + Arrays.toString(cipher));
+		 //System.out.println("Plain:" + Arrays.toString(plain));
+		 //System.out.println("Ergebnis MatrixZeile" +
+		 //Arrays.toString(result));
 		return result;
 	}
 
@@ -249,47 +261,48 @@ public class Encrypt {
 		int[][] old = new int[input.length][input[0].length];
 
 		for (int i = 0; i < input.length; i++) {
-		
+
 			for (int j = 0; j < input[0].length; j++) {
-				
+
 				old[i][j] = input[i][j];
 
 			}
 
 		}
 
-	
 		for (int i = 0; i < input[0].length; i++) {
 
-			
-			
-			
 			for (int j = i + 1; j < input.length; j++) {
 
 				if (input[i][i] == 0) {
 
 					indexpivot = findNextPivot(input, i);
-					if(indexpivot > 0)input = swapLine(input, i, indexpivot);
-
+					if (indexpivot > 0)
+						input = swapLine(input, i, indexpivot);
+					else {
+						System.out.println("Für spalte:" + i + "kein nächstes Pivot");
+					
+						
+					
+					}
 				}
-			
-				if(input[j][i] ==1)input[j] = eliminate(input[j], input[i]);
-			
+
+				if (input[j][i] == 1)
+					input[j] = eliminate(input[j], input[i]);
+
 			}
-			//System.out.println("Matrix nach schritt:"+ i +"\n");
-			//for (int k = 0; k < input.length; k++) {
-				//System.out.println(Arrays.toString(input[k]));
-			//}
+			// System.out.println("Matrix nach schritt:"+ i +"\n");
+			// for (int k = 0; k < input.length; k++) {
+			// System.out.println(Arrays.toString(input[k]));
+			// }
 
 		}
-/*
-		System.out.println("Input Matrix:\n");
-		for (int i = 0; i < input.length; i++) {
-			System.out.println(Arrays.toString(old[i]));
-		}
-*/
+		/*
+		 * System.out.println("Input Matrix:\n"); for (int i = 0; i <
+		 * input.length; i++) { System.out.println(Arrays.toString(old[i])); }
+		 */
 		System.out.println("Output Matrix:\n");
-		for (int i = 0; i < (input.length/2); i++) {
+		for (int i = 0; i < (input.length / 2); i++) {
 			System.out.println(Arrays.toString(input[i]));
 		}
 		return input;
