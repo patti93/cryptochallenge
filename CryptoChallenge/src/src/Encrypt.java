@@ -62,7 +62,7 @@ public class Encrypt {
 
 		int value = 0, index = 0;
 
-		//System.out.println(shit);
+		// System.out.println(shit);
 		if (shit.length() == 4) {
 
 			index = Integer.parseInt(shit.substring(2, 4));
@@ -111,12 +111,13 @@ public class Encrypt {
 			}
 
 			else if (c[i] != 32 && c[i] != 10 && c[i] != 9 && c[i] != 13) {
-				
+
 				summand = summand + c[i];
 			}
-		
-			//in the end do shit anyway
-			if(i == c.length -1)temp.add(doShit(summand));
+
+			// in the end do shit anyway
+			if (i == c.length - 1)
+				temp.add(doShit(summand));
 
 		}
 		// 1en Zählen für addition in der Zeile -> gerade Endergebnis 0 ungerade
@@ -126,7 +127,7 @@ public class Encrypt {
 			if (temp.get(j) == 1)
 				count++;
 		}
-		//System.out.println(temp.toString());
+		// System.out.println(temp.toString());
 
 		if (count % 2 == 0)
 			result = 0;
@@ -162,7 +163,7 @@ public class Encrypt {
 		List<String> expressions = new ArrayList<String>(Arrays.asList(pKey.split(",")));
 
 		for (int i = 0; i < output.length; i++) {
-			//System.out.println(expressions.get(i));
+			// System.out.println(expressions.get(i));
 			output[i] = doCalcLine(expressions.get(i).toCharArray());
 		}
 		return output;
@@ -183,12 +184,12 @@ public class Encrypt {
 					result[j + (plain.length * i)] = 0;
 				}
 			}
-			
+
 		}
-		 //System.out.println("Cipher:" + Arrays.toString(cipher));
-		 //System.out.println("Plain:" + Arrays.toString(plain));
-		 //System.out.println("Ergebnis MatrixZeile" +
-		 //Arrays.toString(result));
+		// System.out.println("Cipher:" + Arrays.toString(cipher));
+		// System.out.println("Plain:" + Arrays.toString(plain));
+		// System.out.println("Ergebnis MatrixZeile" +
+		// Arrays.toString(result));
 		return result;
 	}
 
@@ -258,6 +259,7 @@ public class Encrypt {
 
 		int indexpivot = 0;
 
+		//just a copy for output
 		int[][] old = new int[input.length][input[0].length];
 
 		for (int i = 0; i < input.length; i++) {
@@ -269,25 +271,23 @@ public class Encrypt {
 			}
 
 		}
-
+		// schleife für die spalten
 		for (int i = 0; i < input[0].length; i++) {
-
+			//spalten nach unten ablaufen
 			for (int j = i + 1; j < input.length; j++) {
-
+				// Keine 1 am Anfang-> tauschen
 				if (input[i][i] == 0) {
-
+					//suche nächste Zeile mit pivot element 
 					indexpivot = findNextPivot(input, i);
 					if (indexpivot > 0)
 						input = swapLine(input, i, indexpivot);
+					//kein weiteres pivot gefunden
 					else {
-						System.out.println("Für spalte:" + i + "kein nächstes Pivot");
-					
 						
-					
 					}
 				}
-
-				if (input[j][i] == 1)
+				 //nach unten die 1en für die spalte eliminieren
+				 if (input[j][i] == 1)
 					input[j] = eliminate(input[j], input[i]);
 
 			}
