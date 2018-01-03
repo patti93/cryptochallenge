@@ -64,14 +64,14 @@ public class Encrypt {
 
 			index = Integer.parseInt(shit.substring(2, 3));
 		}
-		// System.out.println(shit);
-		// System.out.println(index);
+		 System.out.println(shit);
+		 System.out.println(index);
 		value = message[index - 1];
 
 		return value;
 	}
 
-	private static int doShit(String shit) {
+	public static int doShit(String shit) {
 
 		int length = shit.length();
 		int result = 0;
@@ -85,7 +85,7 @@ public class Encrypt {
 		return result;
 	}
 
-	private static int doCalcLine(char[] c) {
+	public static int doCalcLine(char[] c) {
 
 		String summand = "";
 		int value = 0, count = 0;
@@ -249,9 +249,9 @@ public class Encrypt {
 		int[][] old = new int[input.length][input[0].length];
 
 		for (int i = 0; i < input.length; i++) {
-
+		
 			for (int j = 0; j < input[0].length; j++) {
-
+				
 				old[i][j] = input[i][j];
 
 			}
@@ -276,20 +276,20 @@ public class Encrypt {
 				if(input[j][i] ==1)input[j] = eliminate(input[j], input[i]);
 			
 			}
-			System.out.println("Matrix nach schritt:"+ i +"\n");
-			for (int k = 0; k < input.length; k++) {
-				System.out.println(Arrays.toString(input[k]));
-			}
+			//System.out.println("Matrix nach schritt:"+ i +"\n");
+			//for (int k = 0; k < input.length; k++) {
+				//System.out.println(Arrays.toString(input[k]));
+			//}
 
 		}
-
+/*
 		System.out.println("Input Matrix:\n");
 		for (int i = 0; i < input.length; i++) {
 			System.out.println(Arrays.toString(old[i]));
 		}
-
+*/
 		System.out.println("Output Matrix:\n");
-		for (int i = 0; i < input.length; i++) {
+		for (int i = 0; i < (input.length/2); i++) {
 			System.out.println(Arrays.toString(input[i]));
 		}
 		return input;
