@@ -259,7 +259,7 @@ public class Encrypt {
 
 		int indexpivot = 0;
 
-		//just a copy for output
+		// just a copy for output
 		int[][] old = new int[input.length][input[0].length];
 
 		for (int i = 0; i < input.length; i++) {
@@ -273,21 +273,21 @@ public class Encrypt {
 		}
 		// schleife für die spalten
 		for (int i = 0; i < input[0].length; i++) {
-			//spalten nach unten ablaufen
+			// spalten nach unten ablaufen
 			for (int j = i + 1; j < input.length; j++) {
 				// Keine 1 am Anfang-> tauschen
 				if (input[i][i] == 0) {
-					//suche nächste Zeile mit pivot element 
+					// suche nächste Zeile mit pivot element
 					indexpivot = findNextPivot(input, i);
 					if (indexpivot > 0)
 						input = swapLine(input, i, indexpivot);
-					//kein weiteres pivot gefunden
+					// kein weiteres pivot gefunden
 					else {
-						
+
 					}
 				}
-				 //nach unten die 1en für die spalte eliminieren
-				 if (input[j][i] == 1)
+				// nach unten die 1en für die spalte eliminieren
+				if (input[j][i] == 1)
 					input[j] = eliminate(input[j], input[i]);
 
 			}
@@ -302,7 +302,7 @@ public class Encrypt {
 		 * input.length; i++) { System.out.println(Arrays.toString(old[i])); }
 		 */
 		System.out.println("Output Matrix:\n");
-		for (int i = 0; i < (input.length / 2); i++) {
+		for (int i = 0; i < 1810; i++) {
 			System.out.println(Arrays.toString(input[i]));
 		}
 		return input;
@@ -327,6 +327,25 @@ public class Encrypt {
 		else
 			return pivotindex;
 
+	}
+
+	public static List<int[]> getSolutions(int[][] matrix) {
+
+		
+		//Assuming Ax=b for b is a zero vector
+		
+		List<int[]> solutions = new ArrayList<>();
+
+		for (int i = matrix.length - 1; i > 0; i--) {
+
+			for (int k = matrix[0].length; k > 0; k--) {
+				
+				
+			}
+
+		}
+
+		return solutions;
 	}
 
 }
