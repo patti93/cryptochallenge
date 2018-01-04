@@ -85,10 +85,15 @@ public class Encrypt {
 
 		int length = summand.length();
 		int result = 0;
+		
+		//x_14
 		if (length < 6) {
 			result = getValueFromArray(summand);
+		
+		//x_12*x_14	
 		} else if (length > 6) {
-			List<String> splitted = new ArrayList<String>(Arrays.asList(summand.split("\\*")));
+			
+			List<String> splitted = new ArrayList<String>(Arrays.asList(summand.split("\\*"))); // split bei *, \\ escaped ein Regex
 
 			result = multiBin(getValueFromArray(splitted.get(0)), getValueFromArray(splitted.get(1)));
 		}
