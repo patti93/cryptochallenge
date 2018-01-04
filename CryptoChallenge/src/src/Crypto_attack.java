@@ -86,10 +86,10 @@ public class Crypto_attack {
 		Encrypt.setKey("Beispielangriff.txt");
 		//Encrypt.setKey("kryptochallengegruppe10.txt");
 
-		Encrypt.gaussianElimination(Encrypt.create(5));
+		//Encrypt.gaussianElimination(Encrypt.create(5));
 
 		// Encrypt.gaussianElimination(test);
-		// Encrypt.gaussianElimination(test2);
+		Encrypt.gaussianElimination(test2);
 
 
 		/*
