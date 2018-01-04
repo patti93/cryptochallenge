@@ -10,13 +10,12 @@ public class Encrypt {
 	private static String pKey;
 
 	public static void setKey(String filename) throws IOException {
-		
-		
-		//Reader zum einlesen aus der .txt datei
+
+		// Reader zum einlesen aus der .txt datei
 		FileReader fr = new FileReader(filename);
 		BufferedReader br = new BufferedReader(fr);
 
-		//nur benötigt für die länge des Buffers 
+		// nur benötigt für die länge des Buffers
 		File f = new File(filename);
 
 		buffer = new char[(int) f.length()];
@@ -45,7 +44,7 @@ public class Encrypt {
 			result = 0;
 		else if (a == 1 && b == 1) // 1+1 = 0
 			result = 0;
-		else if (a != b)  // 1+0=1 0+1=1
+		else if (a != b) // 1+0=1 0+1=1
 			result = 1;
 
 		return result;
@@ -54,9 +53,8 @@ public class Encrypt {
 
 	public static int multiBin(int a, int b) {
 		int result = 0;
-		
-		
-		//Return ist nur 1 wenn beide Faktoren 1 sind
+
+		// Return ist nur 1 wenn beide Faktoren 1 sind
 		if (a == 1 && b == 1)
 			result = 1;
 
@@ -72,10 +70,10 @@ public class Encrypt {
 			index = Integer.parseInt(summand.substring(2, 4));
 
 		} else if (summand.length() == 3) {
-			// Bsp x_1 -> length = 3 -> substring 2,3 = "1" -> int 1 
+			// Bsp x_1 -> length = 3 -> substring 2,3 = "1" -> int 1
 			index = Integer.parseInt(summand.substring(2, 3));
 		}
-		
+
 		value = message[index - 1];
 
 		return value;
@@ -85,15 +83,21 @@ public class Encrypt {
 
 		int length = summand.length();
 		int result = 0;
-		
-		//x_14
+
+		// x_14
 		if (length < 6) {
 			result = getValueFromArray(summand);
-		
-		//x_12*x_14	
+
+			// x_12*x_14
 		} else if (length > 6) {
-			
-			List<String> splitted = new ArrayList<String>(Arrays.asList(summand.split("\\*"))); // split bei *, \\ escaped ein Regex
+
+			List<String> splitted = new ArrayList<String>(Arrays.asList(summand.split("\\*"))); // split
+																								// bei
+																								// *,
+																								// \\
+																								// escaped
+																								// ein
+																								// Regex
 
 			result = multiBin(getValueFromArray(splitted.get(0)), getValueFromArray(splitted.get(1)));
 		}
@@ -110,16 +114,24 @@ public class Encrypt {
 		// durchlaufe gesamten Ausdruck
 		for (int i = 0; i < c.length; i++) {
 
-			// summand ende! 
+			// summand ende!
 			if (c[i] == '+') {
 
 				temp.add(resolveSummand(summand));
-				//summand zurücksetzen
+				// summand zurücksetzen
 				summand = "";
 
 			}
 
-			else if (c[i] != 32 && c[i] != 10 && c[i] != 9 && c[i] != 13) { // Auf Zeichen prüfen die wir nicht wollen,  \n, \t
+			else if (c[i] != 32 && c[i] != 10 && c[i] != 9 && c[i] != 13) { // Auf
+																			// Zeichen
+																			// prüfen
+																			// die
+																			// wir
+																			// nicht
+																			// wollen,
+																			// \n,
+																			// \t
 
 				summand = summand + c[i];
 			}
@@ -129,8 +141,8 @@ public class Encrypt {
 				temp.add(resolveSummand(summand));
 
 		}
-		// 1en Zählen für addition in der Zeile -> gerade Endergebnis 0 
-		//ungerade Endergebnis 1
+		// 1en Zählen für addition in der Zeile -> gerade Endergebnis 0
+		// ungerade Endergebnis 1
 		for (int j = 0; j < temp.size(); j++) {
 
 			if (temp.get(j) == 1)
@@ -171,8 +183,7 @@ public class Encrypt {
 		// in die einzelnen Zeilen splitten
 		List<String> expressions = new ArrayList<String>(Arrays.asList(pKey.split(",")));
 
-		
-		//Führe Berechnung für jede Zeile aus
+		// Führe Berechnung für jede Zeile aus
 		for (int i = 0; i < output.length; i++) {
 			// System.out.println(expressions.get(i));
 			output[i] = doCalcLine(expressions.get(i).toCharArray());
@@ -190,7 +201,7 @@ public class Encrypt {
 				for (int j = 0; j < plain.length; j++) {
 					result[j + (cipher.length * i)] = cipher[j];
 				}
-			} else { //fülle 0en in result
+			} else { // fülle 0en in result
 				for (int j = 0; j < plain.length; j++) {
 					result[j + (plain.length * i)] = 0;
 				}
@@ -284,21 +295,21 @@ public class Encrypt {
 		}
 		// schleife für die spalten
 		for (int i = 0; i < input[0].length; i++) {
-			
+
 			// spalten nach unten ablaufen
 			for (int j = i + 1; j < input.length; j++) {
-				
+
 				// Keine 1 am Anfang-> tauschen
 				if (input[i][i] == 0) {
-					
+
 					// suche nächste Zeile mit pivot element
 					indexpivot = findNextPivot(input, i);
 					if (indexpivot > 0)
 						input = swapLine(input, i, indexpivot);
-					
+
 					// kein weiteres pivot gefunden
 					else {
-						//eventuell Zeilen hochtauschen
+						// eventuell Zeilen hochtauschen
 					}
 				}
 				// nach unten die 1en für die spalte eliminieren
@@ -312,10 +323,12 @@ public class Encrypt {
 			// }
 
 		}
-		
-		System.out.println("Input Matrix:\n"); for (int i = 0; i <
-		input.length; i++) { System.out.println(Arrays.toString(old[i])); }
-		 
+
+		System.out.println("Input Matrix:\n");
+		for (int i = 0; i < input.length; i++) {
+			System.out.println(Arrays.toString(old[i]));
+		}
+
 		System.out.println("Output Matrix:\n");
 		for (int i = 0; i < input.length; i++) {
 			System.out.println(Arrays.toString(input[i]));
@@ -358,6 +371,37 @@ public class Encrypt {
 		}
 
 		return solutions;
+	}
+
+	public static boolean checkForZeroArray(int[] array) {
+
+		boolean check = true;
+
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] != 0)
+				check = false;
+		}
+
+		return check;
+	}
+
+	public static int getRang(int[][] matrix) {
+
+		int rang = 0, n = 0, count = 0;
+
+		n = matrix.length;
+
+		int[][] aftergauss = gaussianElimination(matrix);
+		
+		for (int i = 0; i < aftergauss.length; i++) {
+
+			if (checkForZeroArray(aftergauss[i]))
+				count++;
+
+		}
+		rang = n - count;
+		
+		return rang;
 	}
 
 }
