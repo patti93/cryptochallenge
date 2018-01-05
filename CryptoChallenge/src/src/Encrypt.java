@@ -217,6 +217,7 @@ public class Encrypt {
 
 	public static int[][] create(int lengthplain) {
 
+		// 2* n^2 um sicher die linear unabhängigen Paare zu finden
 		int lines = 2 * (lengthplain * lengthplain);
 		int[] plain = new int[lengthplain];
 		int[] cipher;
@@ -356,21 +357,24 @@ public class Encrypt {
 
 	}
 
-	public static List<int[]> getSolutions(int[][] matrix) {
+	public static int[] getSolution(int[][] matrix) {
 
 		// Ax=b b ist hier null vektor
 
-		List<int[]> solutions = new ArrayList<>();
+		
+		int[] sol = new int[matrix[0].length];
+		
+		
+		
 
-		for (int i = matrix.length - 1; i > 0; i--) {
+			for (int i = matrix.length - 1; i >= 0; i--) {
 
-			for (int k = matrix[0].length; k > 0; k--) {
-
+				
+					//TBD
+				
 			}
-
-		}
-
-		return solutions;
+		
+		return sol;
 	}
 
 	public static boolean checkForZeroArray(int[] array) {
@@ -392,7 +396,7 @@ public class Encrypt {
 		n = matrix.length;
 
 		int[][] aftergauss = gaussianElimination(matrix);
-		
+
 		for (int i = 0; i < aftergauss.length; i++) {
 
 			if (checkForZeroArray(aftergauss[i]))
@@ -400,8 +404,56 @@ public class Encrypt {
 
 		}
 		rang = n - count;
-		
+
 		return rang;
+	}
+
+	public static int[] findFreeVariables(int[][] matrix) {
+
+		int[] variables = new int[matrix[0].length];
+
+		for (int i = 0; i < matrix[0].length; i++) {
+
+			// eine 1 an dieser Stelle sagt uns, das hier ein Sprung in der
+			// Stufenform war und wir diese frei setzen dürfen
+			if (matrix[i][i] == 0)
+				variables[i] = 1;
+			else
+				variables[i] = 0;
+
+		}
+
+		return variables;
+	}
+
+	public static int[] setVariable(int[] array, int[] currentSol, int pos) {
+
+		
+		//Hat Fehler
+		
+		
+		int count = 0;
+
+		for (int i = 0; i < array.length; i++) {
+			
+			System.out.println(multiBin(array[i], currentSol[i]));
+			if (multiBin(array[i], currentSol[i]) == 1)
+				count++;
+
+		}
+		// die Stellen nach pos bilden eine gerade anzahl an 1en, daraus folgt,
+		// dass an pos 0 stehen muss damit die zeile insgesamt 0 ergibt
+		
+		System.out.println("count:" + count);
+		if (count % 2 == 0)
+			currentSol[pos] = 0;
+		// andernfalls entsprechend eine 1
+		else
+			currentSol[pos] = 1;
+
+
+		return currentSol;
+
 	}
 
 }

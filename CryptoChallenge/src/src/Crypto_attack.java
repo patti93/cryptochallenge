@@ -17,15 +17,16 @@ public class Crypto_attack {
 				0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1 };
 		int[] chitext;
 
-		int[] array = { 1, 1, 1, 0, 0 };
+		int[] array = { 1, 0, 1, 0, 0 };
 
 		int[][] test = {
 
-				{ 1, 0, 1, 1, 0 }, 
-				{ 1, 0, 1, 0, 0 },
-				{ 1, 0, 0, 1, 0 },
-				{ 1, 0, 0, 0, 1 },
-				{ 0, 0, 1, 0, 1 },
+				{1, 1, 0, 1, 1, 0 }, 
+				{1, 1, 0, 1, 1, 0 },
+				{1, 1, 1, 0, 1, 0 },
+				{1, 1, 0, 0, 0, 1 },
+				{1, 1, 0, 0, 0, 1 },
+				{1, 0, 1, 1, 0, 1 },
 
 		};
 
@@ -86,12 +87,14 @@ public class Crypto_attack {
 		Encrypt.setKey("Beispielangriff.txt");
 		//Encrypt.setKey("kryptochallengegruppe10.txt");
 
-		//Encrypt.gaussianElimination(Encrypt.create(5));
+		Encrypt.gaussianElimination(Encrypt.create(5));
 
 		// Encrypt.gaussianElimination(test);
-		Encrypt.gaussianElimination(test2);
+		//Encrypt.gaussianElimination(test2);
 
-
+		
+		
+		
 		/*
 		 * chitext= Encrypt.runEncryption(); System.out.println("Klar1"
 		 * +Arrays.toString(message)); System.out.println("Chi1"
